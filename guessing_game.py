@@ -34,30 +34,30 @@ def start_game():
     print("Welcome to the Number Guessing Game!")
     print("-----------------------------------")
     
-    numberToBeGuessed = random.randint(1,11)
-    
+    numberToBeGuessed = random.randint(1,10)
+    print(numberToBeGuessed, "number to be guessed")
     count = 0
     
     while True:
         answerStr = input("Pick a number between 1 and 10: ")
-        
         try:
             answer = int(answerStr)
+            if(answer < 0 or answer >10):
+                continue
+            if answer <  numberToBeGuessed:
+                print("It is higher!")
+                count+=1
+            
+            elif answer > numberToBeGuessed:
+                print("It is lower!")
+                count+=1
+            elif answer == numberToBeGuessed:
+                count+=1
+                print("You got it! It took you {} tries".format(count))
+                break
+            
         except ValueError:
-            print("This is not a valid value. Please guess again")
-            
-        if int(answer) <  numberToBeGuessed:
-            print("It is higher!")
-            count+=1
-            
-        elif answer > numberToBeGuessed:
-            print("It is lower!")
-            count+=1
-            
-        else:
-            count+=1
-            print("You got it! It took you {} tries".format(count))
-            break
+            print("This is not a valid value. Please guess again.")
     end_game(count)
             
 def end_game(count):
@@ -70,16 +70,9 @@ def end_game(count):
             
         elif answer == 'n':
             print("Good bye!")
-            break;
+            return False
         else:
             print("Please enter a valid input! y or n")
-    
-    
-    
-    
-    
-    
-
 
 
 # Kick off the program by calling the start_game function.
